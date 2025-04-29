@@ -12,6 +12,7 @@ void UMainMenu::NativeConstruct()
 	LoginBtn->OnClicked.AddDynamic(this, &ThisClass::LoginBtnClicked);
 	CreateSessionBtn->OnClicked.AddDynamic(this, &ThisClass::CreateSessionBtnClicked);
 	FindSessionBtn->OnClicked.AddDynamic(this, &ThisClass::FindSessionBtnClicked);
+	// JoinSessionBtn->OnClicked.AddDynamic(this, &ThisClass::JoinSessionBtnClicked);
 	FriendsBtn->OnClicked.AddDynamic(this, &ThisClass::FriendsBtnClicked);
 	AchievementsBtn->OnClicked.AddDynamic(this, &ThisClass::AchievementsBtnClicked);
 }
@@ -39,6 +40,14 @@ void UMainMenu::FindSessionBtnClicked()
 		GameInstance->FindSession();
 	}
 }
+
+// void UMainMenu::JoinSessionBtnClicked()
+// {
+// 	if(GameInstance)
+// 	{
+// 		//GameInstance->JoinSession();
+// 	}
+// }
 
 void UMainMenu::FriendsBtnClicked()
 {

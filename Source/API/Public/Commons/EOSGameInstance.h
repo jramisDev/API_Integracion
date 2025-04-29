@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
 #include "Interfaces/OnlineIdentityInterface.h"
+#include "Interfaces/OnlineSessionInterface.h"
 #include "EOSGameInstance.generated.h"
 
 class FOnlineSessionSearch;
@@ -25,9 +26,9 @@ class API_API UEOSGameInstance : public UGameInstance
 	void OnLoginComplete(int32 LocalUserNum, bool bWasSuccessful, const FUniqueNetId& UserId, const FString& Error);
 	void CreateSessionCompleted(FName NameSession, bool bWasSuccessful);
 	void FindSessionCompleted(bool bWasSuccessful);
+	void JoinSessionCompleted(FName NameSession, EOnJoinSessionCompleteResult::Type Result);
 
 public:
-	
 	virtual void Init() override;
 
 	UFUNCTION(BlueprintCallable)

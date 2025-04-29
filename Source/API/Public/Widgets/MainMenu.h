@@ -30,6 +30,9 @@ private:
 	UPROPERTY(meta = (BindWidget))
 	UButton* FindSessionBtn;
 	
+	// UPROPERTY(meta = (BindWidget))
+	// UButton* JoinSessionBtn;
+	
 	UPROPERTY(meta = (BindWidget))
 	UButton* FriendsBtn;
 	
@@ -44,6 +47,9 @@ private:
 	
 	UFUNCTION()
 	void FindSessionBtnClicked();
+	
+	// UFUNCTION()
+	// void JoinSessionBtnClicked();
 
 	UFUNCTION()
 	void FriendsBtnClicked();

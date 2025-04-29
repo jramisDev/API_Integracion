@@ -27,6 +27,7 @@ void UEOSGameInstance::Init()
         SessionPtr = OnlineSubsystem->GetSessionInterface();
         SessionPtr->OnCreateSessionCompleteDelegates.AddUObject(this, &ThisClass::CreateSessionCompleted);
         SessionPtr->OnFindSessionsCompleteDelegates.AddUObject(this, &ThisClass::FindSessionCompleted);
+        SessionPtr->OnJoinSessionCompleteDelegates.AddUObject(this, &ThisClass::JoinSessionCompleted);
     }
     // Llamar login automáticamente al iniciar
     Login();
@@ -74,7 +75,7 @@ void UEOSGameInstance::CreateSession()
         NewSessionSettings.bUsesPresence = true;
         NewSessionSettings.bAllowJoinInProgress = true;
         NewSessionSettings.bAllowJoinViaPresence = true;
-        NewSessionSettings.NumPublicConnections = true;
+        NewSessionSettings.NumPublicConnections = 10;
 
         NewSessionSettings.Set(FName("LobbyName"), FString("MyFunLobby"), EOnlineDataAdvertisementType::ViaOnlineServiceAndPing);
         
@@ -117,16 +118,28 @@ void UEOSGameInstance::FindSession()
     }
 }
 
-
-
 void UEOSGameInstance::FindSessionCompleted(bool bWasSuccessful)
 {
-    if(bWasSuccessful)
+    if(bWasSuccessful && SessionSearch->SearchResults.Num() > 0)
     {
         for (const FOnlineSessionSearchResult& LobbyFound : SessionSearch->SearchResults)
         {
             UE_LOG(LogTemp, Warning, TEXT("Found session withd id: %s"), *LobbyFound.GetSessionIdStr());
         }
+
+        const FOnlineSessionSearchResult& SearchResult = SessionSearch->SearchResults[0];
+        SessionPtr->JoinSession(0, "", SearchResult);
+        
+    }
+}
+
+void UEOSGameInstance::JoinSessionCompleted(FName NameSession, EOnJoinSessionCompleteResult::Type Result)
+{
+    if(Result == EOnJoinSessionCompleteResult::Success)
+    {
+        FString TravelUrl;
+        SessionPtr->GetResolvedConnectString("", TravelUrl);
+        GetFirstLocalPlayerController(GetWorld())->ClientTravel(TravelUrl, TRAVEL_Absolute);
     }
 }
 
