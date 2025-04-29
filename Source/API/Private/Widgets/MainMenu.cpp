@@ -10,7 +10,10 @@ void UMainMenu::NativeConstruct()
 	GameInstance = GetGameInstance<UEOSGameInstance>();
 
 	LoginBtn->OnClicked.AddDynamic(this, &ThisClass::LoginBtnClicked);
+	CreateSessionBtn->OnClicked.AddDynamic(this, &ThisClass::CreateSessionBtnClicked);
+	FindSessionBtn->OnClicked.AddDynamic(this, &ThisClass::FindSessionBtnClicked);
 	FriendsBtn->OnClicked.AddDynamic(this, &ThisClass::FriendsBtnClicked);
+	AchievementsBtn->OnClicked.AddDynamic(this, &ThisClass::AchievementsBtnClicked);
 }
 
 void UMainMenu::LoginBtnClicked()
@@ -21,10 +24,34 @@ void UMainMenu::LoginBtnClicked()
 	}
 }
 
+void UMainMenu::CreateSessionBtnClicked()
+{
+	if(GameInstance)
+	{
+		GameInstance->CreateSession();
+	}
+}
+
+void UMainMenu::FindSessionBtnClicked()
+{
+	if(GameInstance)
+	{
+		GameInstance->FindSession();
+	}
+}
+
 void UMainMenu::FriendsBtnClicked()
 {
 	if(GameInstance)
 	{
-		//GameInstance->GetAllFriends();
+		GameInstance->GetAllFriends();
+	}
+}
+
+void UMainMenu::AchievementsBtnClicked()
+{
+	if(GameInstance)
+	{
+		GameInstance->GetAllAchievements();
 	}
 }

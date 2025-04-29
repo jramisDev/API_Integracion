@@ -25,11 +25,29 @@ private:
 	UButton* LoginBtn;
 	
 	UPROPERTY(meta = (BindWidget))
+	UButton* CreateSessionBtn;
+	
+	UPROPERTY(meta = (BindWidget))
+	UButton* FindSessionBtn;
+	
+	UPROPERTY(meta = (BindWidget))
 	UButton* FriendsBtn;
+	
+	UPROPERTY(meta = (BindWidget))
+	UButton* AchievementsBtn;
 
 	UFUNCTION()
 	void LoginBtnClicked();
 
 	UFUNCTION()
+	void CreateSessionBtnClicked();
+	
+	UFUNCTION()
+	void FindSessionBtnClicked();
+
+	UFUNCTION()
 	void FriendsBtnClicked();
+
+	UFUNCTION()
+	void AchievementsBtnClicked();
 };
